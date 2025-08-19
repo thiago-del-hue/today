@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width="device-width, initial-scale="1.0">
+<title> Comunicado</title>
+<script src="thiago.js"></script>
+<style>
+    body {
+  margin: 50px;
+  background-color: #475fc8;
+  display: flex;
+  justify-content: center; 
+}
+
+.container {
+  text-align: center;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+button {
+  background-color: #a23839ac;
+  color:white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+<p id="mensagem">Validar cupom de desconto!</p>
+<input type="text" id="nome" placeholder=" Verificar">
+<button id="botao" onclick="mensagem()">Verificar</button>
+</div>
+</body>
+</html>
