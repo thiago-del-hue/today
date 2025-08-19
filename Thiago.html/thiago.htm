@@ -1,41 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width="device-width, initial-scale="1.0">
-<title> Comunicado</title>
-<script src="thiago.js"></script>
-<style>
-    body {
-  margin: 50px;
-  background-color: #475fc8;
-  display: flex;
-  justify-content: center; 
-}
-
-.container {
-  text-align: center;
-  background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-}
-
-button {
-  background-color: #a23839ac;
-  color:white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-    <div class="container">
-<p id="mensagem">Validar cupom de desconto!</p>
-<input type="text" id="nome" placeholder=" Verificar">
-<button id="botao" onclick="mensagem()">Verificar</button>
-</div>
+  <p id="mensagem"> Verifique se o login e senha está correto!</p>
+<input type="text" id="palavra" placeholder=" Digite o login">
+<input type="password" id="senha" placeholder=" digite sua senha">
+<button onclick="verificarPalavra()">Verificar informações</button>
+<script>
+  function verificarPalavra(){
+    const palavras= [{login:"Thiago18",senha:"345"},{login:"Rick11",senha:"GT23"}];
+    const input= document.getElementById("palavra").value;
+    const incorreta=document.getElementById("senha").value;
+    const mensagem= document.getElementById("mensagem");
+    let encontrado = false;
+    for (let i=0; i< palavras.length; i++){
+      if(input== palavras[i].login && incorreta==palavras[i].senha){
+        encontrado = true;
+      mensagem.innerHTML="login encontrado";
+      }
+    }
+    if(!encontrado){
+      mensagem.innerHTML="login não encontrado";
+    }
+  }
+</script>
 </body>
 </html>
