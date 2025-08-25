@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p id="mensagem"> Verifique se o login está correto!</p>
+<input type="text" id="palavra" placeholder=" Digite o login">
+<input type="password" id="senha" placeholder=" digite sua senha">
+<button onclick="verificarPalavra()">Verificar informações</button>
+<script>
+  function verificarPalavra(){
+    const palavras= [{login:"Thiago18",senha:"345"},{login:"Rick11",senha:"GT23"}];
+    const input= document.getElementById("palavra").value;
+    const incorreta=document.getElementById("senha").value;
+    const mensagem= document.getElementById("mensagem");
+    let encontrado = false;
+    for (let i=0; i< palavras.length; i++){
+      if(input== palavras[i].login && incorreta==palavras[i].senha){
+        encontrado = true;
+      mensagem.innerHTML="login encontrado";
+      setTimeout(() =>{
+        window.location.href="https://www.playstation.com/pt-br/playstation-network/";
+        mensagem.innerHTML="Será que você está cadastrado?";
+      },3000);
+      
+      }
+    }
+    if(!encontrado){
+      mensagem.innerHTML="login não encontrado";
+      setTimeout(() =>{
+      documment.getElementById("palavra").value="";
+      document.getElementById("senha").value="";
+      },2000);
+     
+
+      }
+    }
+  
+</script>
+</body>
+</html>
