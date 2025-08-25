@@ -21,21 +21,30 @@
       if(input== palavras[i].login && incorreta==palavras[i].senha){
         encontrado = true;
       mensagem.innerHTML="login encontrado";
-      setTimeout(() => {
+      setTimeout(() =>{
+        window.location.href="https://www.playstation.com/pt-br/playstation-network/";
         mensagem.innerHTML="Será que você está cadastrado?";
-        título.innerHTML="Validação do Usuário"; 
       },3000);
-      documment.getElementById("palavra").value="";
-      document.getElementById("senha").value="";
+      
       }
     }
     if(!encontrado){
       mensagem.innerHTML="login não encontrado";
-  
+      setTimeout(() =>{
+      documment.getElementById("palavra").value="";
+      document.getElementById("senha").value="";
+      },2000);
+     
 
       }
     }
   
 </script>
 </body>
+</html>
+    }
+  
+</script>
+</body>
+
 </html>
