@@ -1,0 +1,38 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    
+ </html><body>
+    <header>
+    Cursos- Aprimorando sua Culinária
+    </header>
+    <ul>
+        <li>Confeitaria</li>
+        <li>Segurança alimentar</li>
+        <li>Cocção e Cortes</li>
+    </ul>
+    <footer></footer>
+</body>
+<a href="https://www.google.com/search?q=facebook&oq=face&gs_lcrp=EgZjaHJvbWUqEAgAEAAYgwEY4wIYsQMYgAQyEAgAEAAYgwEY4wIYsQMYgAQyEwgBEC4YgwEYxwEYsQMY0QMYgAQyBggCEEUYOTIKCAMQABixAxiABDINCAQQABiDARixAxiABDITCAUQLhiDARjHARixAxjRAxiABDIKCAYQABixAxiABDINCAcQABiDARixAxiABDINCAgQABixAxiABBiKBTINCAkQABiDARixAxiABNIBCDYyMzRqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8/">Facebook</a>
+</footer>
+</body>
+<header>
+    Cursos- Aprimorando sua Culinária
+</header>
+<h2>Escolha um Curso para saber mais</h2>
+<ul>
+    <li onclick="carregarCurso('Confeitaria')">Curso de Confeitaria</li>
+    <li onclick="carregarCurso('Segurança alimentar')">Curso de Segurança alimentar</li>
+    <li onclik="carregarCurso('Segurança alimentar')">Curso de Cocção e Cortes</li>
+</ul>
+<div id="detalhes"></div>
+<footer>
+    &copy;2025.CursosMG.Todos os Direitos Reservados ao Aluno.
+    <p>Telefone:(31)99654-0980</p>
+    <a href="https://www.google.com/search?q=facebook&oq=fa&gs_lcrp=EgZjaHJvbWUqEAgAEAAYgwEY4wIYsQMYgAQyEAgAEAAYgwEY4wIYsQMYgAQyEwgBEC4YgwEYxwEYsQMY0QMYgAQyDAgCEEUYORixAxiABDINCAMQABiDARixAxiABDIKCAQQABixAxiABDIHCAUQABiABDIKCAYQABixAxiABDIHCAcQABiABDIHCAgQABiPAjIHCAkQABiPAtIBCDE0MzRqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8/">Facebook</a>
+</footer>
