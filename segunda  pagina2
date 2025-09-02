@@ -4,24 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+   <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #e0f2f1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        color: #333;
+    }
+
+    header, footer {
+        background-color: #00796b;
+        color: white;
+        padding: 30px;
+        width: 100%;
+        max-width: 900px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+        margin: 30px 0 20px;
+        font-size: 28px;
+        color: #004d40;
+        text-align: center;
+    }
+
+    #caixa {
+        list-style: none;
+        background-color: #004d40;
+        color: white;
+        padding: 30px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        font-size: 20px;
+        transition: transform 0.2s ease;
+    }
+
+    #caixa li {
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #00695c;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    #caixa li:hover {
+        background-color: #00897b;
+        transform: scale(1.03);
+    }
+
+    #detalhes {
+        font-size: 20px;
+        color: #c62828;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 30px;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        text-align: justify;
+    }
+
+    footer p, footer a {
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
+    footer a {
+        color: #ffccbc;
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+        #caixa, #detalhes, header, footer {
+            width: 95%;
+        }
+
+        #caixa li {
+            font-size: 18px;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+    }
+</style>
+
  </head>
  <body>
-    <header>
-    Cursos- Aprimorando sua Culinária
-    </header>
-    <ul>
-        <li>Confeitaria</li>
-        <li>Segurança Alimentar</li>
-        <li>Cocção e Cortes</li>
-    </ul>
-    <footer></footer>
-<a href="https://www.google.com/search?q=facebook&oq=face&gs_lcrp=EgZjaHJvbWUqEAgAEAAYgwEY4wIYsQMYgAQyEAgAEAAYgwEY4wIYsQMYgAQyEwgBEC4YgwEYxwEYsQMY0QMYgAQyBggCEEUYOTIKCAMQABixAxiABDINCAQQABiDARixAxiABDITCAUQLhiDARjHARixAxjRAxiABDIKCAYQABixAxiABDINCAcQABiDARixAxiABDINCAgQABixAxiABBiKBTINCAkQABiDARixAxiABNIBCDYyMzRqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8/">Facebook</a>
-</footer>
 <header>
     Cursos- Aprimorando sua Culinária
 </header>
 <h2>Escolha um Curso para saber mais</h2>
-<ul>
+<ul id="caixa">
     <li onclick="carregarCurso('Confeitaria')">Curso de Confeitaria</li>
     <li onclick="carregarCurso('Segurança Alimentar')">Curso de Segurança Alimentar</li>
     <li onclick="carregarCurso('Cocção e Cortes')">Curso de Cocção e Cortes</li>
@@ -36,14 +131,14 @@
     async function carregarCurso(curso){
 
         try {
-            document.getElementById("detalhes").innerHTML= "Carregando informações do topico...";
+            document.getElementById("detalhes").innerHTML= "Carregando informações do tópico...";
 
             await new Promise(destaca=>setTimeout(destaca,3000));
 
             let mensagens={
-                "Confeitaria":"O curso Confeitaria abrange técnicas de manipulação correta de ingredientes e utensílios,a preparação de bases de doces(massas,cremes e caldas),técnicas específicas como temperagem de chocolate e decoração,e aplicação de boas práticas de higiene e segurança alimentar",
-                "Segurança Alimentar":"O curso De Segurança Alimentar abrange técnicas profissionais das boas práticas de manipulação de alimentos para garantir a higiene e segurança dos produtos de confeitaria,abordando desde a organização do ambiente e a higiena conduta das mãos e superfícies até o controle de contaminação cruzada,armazenando adequadamente rotulagens e descarte correto de resíduos, visando prteger os alimentos e os consumidores de perigos microbiológicos e químicos",
-                "Cocção e Cortes":"O curso de Cocção e Cortes abrange técnicas fundamentais para a criação de doces e pratos,tais como: métodos de (cozimento) -aplicação de calor aos alimentos;cortes,técnicas para preparos de massas,frutas e carnes; e a manipulação de massas, recheios e coberturas,com foco nas bases da confeitaria e higiene alimentar.O maior objetivo aqui alunos é a montagem decoramento de sobremesas e pratos,utilizando os equipamentos e utensílios corretos e garantindo a qualidade e segurança dos alimentos."
+                "Confeitaria":"O curso Confeitaria abrange técnicas de manipulação correta de ingrediente e utensílios,a preparação de bases de doces(massas,cremes e caldas),técnicas específicas como temperagem de chocolate e decoração,e aplicação de boas práticas de higiene e segurança alimentar",
+                "Segurança Alimentar":"O curso De Segurança Alimentar abrange técnicas profissionais das boas práticas de manipulação de alimentos para garantir a higiene e segurança dos produtos de confeitaria.",
+                "Cocção e Cortes":"O curso de Cocção e Cortes abrange técnicas fundamentais para a criação de doces e pratos,tais como: métodos de (cozimento) -aplicação de calor aos alimentos;cortes,técnicas para preparos de massas,frutas e carnes; e a manipulação de massas, recheios e coberturas,com foco nas bases da confeitaria e higiene alimentar."
             };
             document.getElementById("detalhes").innerHTML = mensagens[curso];
         } catch (erro) {
