@@ -1,38 +1,158 @@
- <!DOCTYPE html>
- <html lang="pt-BR">
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
- </head>
- <body>
-    
- </html><body>
-    <header>
-    Cursos- Aprimorando sua Culinária
-    </header>
-    <ul>
-        <li>Confeitaria</li>
-        <li>Segurança alimentar</li>
-        <li>Cocção e Cortes</li>
-    </ul>
-    <footer></footer>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login estilizado</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #26a69a, #80cbc4);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .login-container {
+      background-color: #ffffff;
+      padding: 40px 35px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .login-message {
+      background-color: #e0f2f1;
+      border: 2px solid #00796b;
+      color: #004d40;
+      font-weight: 700;
+      font-size: 20px;
+      padding: 15px 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 121, 107, 0.3);
+      user-select: none;
+    }
+
+    #mensagem {
+      font-size: 18px;
+      color: #00796b;
+      min-height: 24px;
+      transition: all 0.3s ease-in-out;
+      font-weight: 600;
+      margin-top: 5px;
+      min-height: 28px;
+    }
+
+    input {
+      padding: 14px 18px;
+      width: 100%;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      outline: none;
+      font-size: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      box-shadow: inset 2px 2px 5px #f0f0f0;
+    }
+
+    input:focus {
+      border-color: #26a69a;
+      box-shadow: 0 0 8px rgba(38, 166, 154, 0.6);
+    }
+
+    button {
+      padding: 14px;
+      width: 100%;
+      background-color: #00796b;
+      color: white;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      letter-spacing: 1px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 121, 107, 0.4);
+    }
+
+    button:hover {
+      background-color: #004d40;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0, 77, 64, 0.7);
+    }
+
+    .success {
+      color: green;
+      font-weight: 600;
+    }
+
+    .error {
+      color: red;
+      font-weight: 600;
+    }
+
+    @media (max-width: 500px) {
+      .login-container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-message">Faça o login</div>
+    <input type="text" id="palavra" placeholder="Digite o login" />
+    <input type="password" id="senha" placeholder="Digite sua senha" />
+    <button onclick="verificarPalavra()">Verificar informações</button>
+    <p id="mensagem"></p>
+  </div>
+
+  <script>
+    function verificarPalavra() {
+      const palavras = [
+        { login: "Thiago18", senha: "345" },
+        { login: "Rick11", senha: "GT23" },
+      ];
+      const input = document.getElementById("palavra").value;
+      const incorreta = document.getElementById("senha").value;
+      const mensagem = document.getElementById("mensagem");
+      let encontrado = false;
+
+      for (let i = 0; i < palavras.length; i++) {
+        if (input == palavras[i].login && incorreta == palavras[i].senha) {
+          encontrado = true;
+          mensagem.innerHTML = "login encontrado";
+          mensagem.className = "success";
+          setTimeout(() => {
+            window.location.href = "segunda.html";
+            mensagem.innerHTML = "Será que você está cadastrado?";
+            mensagem.className = "";
+          }, 3000);
+          break;
+        }
+      }
+      if (!encontrado) {
+        mensagem.innerHTML = "login não encontrado";
+        mensagem.className = "error";
+        setTimeout(() => {
+          document.getElementById("palavra").value = "";
+          document.getElementById("senha").value = "";
+          mensagem.innerHTML = "";
+          mensagem.className = "";
+        }, 2000);
+      }
+    }
+  </script>
 </body>
-<a href="https://www.google.com/search?q=facebook&oq=face&gs_lcrp=EgZjaHJvbWUqEAgAEAAYgwEY4wIYsQMYgAQyEAgAEAAYgwEY4wIYsQMYgAQyEwgBEC4YgwEYxwEYsQMY0QMYgAQyBggCEEUYOTIKCAMQABixAxiABDINCAQQABiDARixAxiABDITCAUQLhiDARjHARixAxjRAxiABDIKCAYQABixAxiABDINCAcQABiDARixAxiABDINCAgQABixAxiABBiKBTINCAkQABiDARixAxiABNIBCDYyMzRqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8/">Facebook</a>
-</footer>
-</body>
-<header>
-    Cursos- Aprimorando sua Culinária
-</header>
-<h2>Escolha um Curso para saber mais</h2>
-<ul>
-    <li onclick="carregarCurso('Confeitaria')">Curso de Confeitaria</li>
-    <li onclick="carregarCurso('Segurança alimentar')">Curso de Segurança alimentar</li>
-    <li onclik="carregarCurso('Segurança alimentar')">Curso de Cocção e Cortes</li>
-</ul>
-<div id="detalhes"></div>
-<footer>
-    &copy;2025.CursosMG.Todos os Direitos Reservados ao Aluno.
-    <p>Telefone:(31)99654-0980</p>
-    <a href="https://www.google.com/search?q=facebook&oq=fa&gs_lcrp=EgZjaHJvbWUqEAgAEAAYgwEY4wIYsQMYgAQyEAgAEAAYgwEY4wIYsQMYgAQyEwgBEC4YgwEYxwEYsQMY0QMYgAQyDAgCEEUYORixAxiABDINCAMQABiDARixAxiABDIKCAQQABixAxiABDIHCAUQABiABDIKCAYQABixAxiABDIHCAcQABiABDIHCAgQABiPAjIHCAkQABiPAtIBCDE0MzRqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8/">Facebook</a>
-</footer>
+</html>
