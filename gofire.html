@@ -1,0 +1,153 @@
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorando novos Ares</title>
+   <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+    
+        background-color: #48c753;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        color: #333;
+    }
+
+    header, footer {
+        background-color: #3026c2;
+        color: white;
+        padding: 30px;
+        width: 100%;
+        max-width: 900px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(182, 161, 161, 0.493);
+    }
+
+    h2 {
+        margin: 30px 0 20px;
+        font-size: 28px;
+        color: #0a39d4;
+        text-align: center;
+    }
+
+    #caixa {
+        list-style: none;
+        background-color: #82e476;
+        color: white;
+        padding: 30px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        font-size: 20px;
+        transition: transform 0.2s ease;
+    }
+
+    #caixa li {
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #5c77f1;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    #caixa li:hover {
+        background-color: #0c9449;
+        transform: scale(1.03);
+    }
+
+    #conteudo {
+        font-size: 20px;
+        color: #a22ac7;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 30px;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        text-align: justify;
+    }
+
+    footer p, footer a {
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
+    footer a {
+        color: #ffccbc;
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+        #caixa, #detalhes, header, footer {
+            width: 95%;
+        }
+
+        #caixa li {
+            font-size: 18px;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+    }
+</style>
+
+ </head>
+ <body>
+    <header>
+    Escolha o Seu Destino
+    </header>
+    <ul>
+        <li>Salvador-BA</li>
+        <li>Santiago-Chile</li>
+        <li>Buenos Aires-Argentina</li>
+        <li>Natal-RN</li>
+    </ul>
+    <footer>
+<a href=">https://www.cvc.com.br/lp/ofertas?pmkt=1&gad_source=1&gad_campaignid=22109662001&gbraid=0AAAAADmOlH9159tMNckfFGyjgHBsFtz4k&gclid=EAIaIQobChMIlOCElIO_jwMVK2lIAB3jMjiIEAAYASAAEgLGsfD_BwE"</a>
+</footer>
+<h1>Escolha Um Destino</h1>
+<ul id="caixa">
+    <li onclick="carregarDestino('Salvador-BA')">Salvador-BA</li>
+    <li onclick="carregarDestino('Santiago-Chile')">Santiago-Chile</li>
+    <li onclick="carregarDestino('Buenos Aires-Argentina')">Buenos Aires-Argentina</li>
+    <li onclick="carregarDestino('Natal-RN')">Natal-RN</li>
+
+<footer>2025 Viajar Mais.</footer>    
+<body>
+    <script>   
+    async function carregarDestino(destino){
+
+        try {
+            document.getElementById("conteudo").innerHTML= "Carregando informações do Lugar...";
+
+            await new Promise(destaca=>setTimeout(destaca,4000));
+            let mensagens ={
+                "Salvador-BA": "Pelourinho – Centro histórico com igrejas, museus e arte nas ruas. Elevador    Lacerda – Liga a Cidade Alta à Cidade Baixa com bela vista. Mercado Modelo – Artesanato e comidas típicas. Igreja do Bonfim – Famosa pelas fitinhas e rituais religiosos. Casa do Rio Vermelho – Museu de Jorge Amado e Zélia Gattai. - Praias e Natureza Farol da Barra – Vista linda, museu náutico e pôr do sol inesquecível. Porto da Barra – Praia urbana com mar calmo. Itapuã – Praia famosa com clima tranquilo. Ilha dos Frades – Paraíso acessível de barco na Baía de Todos-os-Santos.Arte e Arquitetura Solar do Unhão / MAM-BA – Arte moderna e vista deslumbrante. Forte de São Marcelo – Forte circular no meio da baía."
+             "Santiago-Chile":"Centro Histórico-Plaza de Armas – Praça central com prédios histórico.Catedral Metropolitana – Linda e imponente, no centro da cidade.Palácio La Moneda – Sede do governo, com troca de guarda.Mirantes e Natureza.Cerro San Cristóbal – Morro com vista da cidade e da Cordilheira dos Andes.Cerro Santa Lucía – Pequeno parque com mirante central e áreas verdes.Sky Costanera – Mirante no prédio mais alto da América Latina.Cultura e Museus La Chascona – Casa-museu de Pablo Neruda.Museu de Arte Pré-Colombiana – Arte indígena latino-americana.Museu Nacional de Belas Artes – Arte chilena e internacional.Gastronomia e Vida NoturnaMercado Central – Frutos do mar e culinária típica.Patio Bellavista – Restaurantes, bares e lojas.Vinícola Concha y Toro – Tour e degustação de vinhos chilenos.",
+           "Buenos Aires-Argentina":"Casa Rosada – Sede do governo argentino, na Plaza de Mayo.Catedral Metropolitana – Igreja onde o Papa Francisco celebrou missas.Teatro Colón – Um dos teatros mais famosos e bonitos do mundo.Bairros IcônicosLa Boca – Bairro colorido com o Caminito, tango nas ruas e o estádio La Bombonera.San Telmo – Antigo e boêmio, com feiras de antiguidades e arte.Palermo – Moderno, com muitos bares, parques e vida noturna.Recoleta – Sofisticado, abriga o famoso Cemitério da Recoleta.Parques e PasseiosBosques de Palermo – Grande parque com lagos, jardim japonês e roseiral.Puerto Madero – Região moderna à beira do rio, com restaurantes e a Puente de la Mujer.Cultura e ArteMuseu de Arte Latino-Americana (MALBA) – Obras modernas e contemporâneas.Museu Nacional de Belas Artes – Arte clássica argentina e internacional.Compras e TradiçõesAvenida Florida – Rua de pedestres com lojas e artistas de rua.Feira de San Telmo (aos domingos) – Artesanato, tango e antiguidades.",
+          "Natal-RN":"Praias-Ponta Negra – Praia urbana mais famosa, com o Morro do Careca.Praia dos Artistas – Próxima ao centro, com ondas fortes.Praia de Genipabu – Dunas, passeios de buggy e dromedários.Pontos HistóricosForte dos Reis Magos – Construção histórica de 1598, na beira-mar.Centro Histórico / Ribeira – Igrejas antigas e prédios coloniais.Natureza e PaisagensParque das Dunas – Maior parque urbano de dunas do Brasil.Barreira do Inferno – Base de lançamento de foguetes (visitação externa).Aquário de Natal – Tanques com peixes, tubarões e outros animais.Passeios ImperdíveisPasseio de buggy pelas dunas – Clássico “com emoção ou sem emoção”.Maior cajueiro do mundo (Pirangi) – Visita ao enorme cajueiro em Parnamirim".,
+};
+document.getElementById("conteudo").innerHTML = mensagens[carregarDestino];
+} catch (erro) {
+    console.error(`error ${erro}`)
+    }
+}
+</script>
+</html>
