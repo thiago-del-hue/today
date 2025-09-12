@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPS</title>
+<style>
+body {transition: background-color 1s;
+    font-family: Arial, sans-serif;
+    color: rgba(0, 255, 255, 0.822);
+    text-align: center;
+    padding-top: 70px;
+          }
+          button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius:5px;
+          }
+    @media(max-width:768px){
+    body{ font-size:35px; padding-top: 50px;}
+    button{ font-size: 14px;padding: 8px 16px;}
+          }
+
+</style>
+</head>
+<body>
+     <h1 id="título"> Olá Pessoas!</h1>
+     <p>Clique no botão para mudar a cor da página de acordo com o horário local.</p>
+     <p id="hora"></p>
+     <p id="data"></p>
+     <button onclick="mudar()">Trocar Cor</button>
+
+<script>
+          function mudar() {
+            const agora= new Date();
+            const hora= agora.getHours();
+            const minutos= agora.getMinutes().toString().padStart(2,"0");
+            const opcoes= { weekday:'long',year:'numeric',month:'long',day:'numeric'};
+            const dataFormatada= agora.toLocaleDateString("pt-BR",opcoes);
+               let cor;
+               let mensagem;
+               if(hora>=6 && hora < 12){
+                    cor="#FFFF00"
+                    mensagem= "Dia Animado!☀️";
+               } else if(hora>=12 && hora < 18){
+                    cor="#FF8C00";
+                    mensagem="Tarde Alegre!🌇;";
+               } else if(hora>=18 && hora < 23){
+                    cor="#4B0082";
+                    mensagem= "Noite Demoradaaa🌆";
+               } else{
+                    cor="#363636";
+                    mensagem= " Hora de descansar!🌑";
+               }
+               document.body.style.backgroundColor= cor;
+               document.getElementById("título").innerHTML= mensagem;
+               document.getElementById("hora").innerHTML= hora + ":" +minutos;
+               document.getElementById("data").innerHTML=dataFormatada;
+               }
+</script>    
+</body>
+</html>
