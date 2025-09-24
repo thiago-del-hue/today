@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RelogioLocaliza</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+  <style>
+    body { 
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background-color 1s;
+    }
+
+    .container {
+      background-color: rgb(248, 248, 244);
+      padding: 20px;
+      max-width: 400px; 
+      width: 100%;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 22px; }
+      p { font-size: 14px; }
+      .container { width: 70%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p id="título"></p>
+    <p id="hora"></p>
+    <p id="data"></p>
+    <p id="frases"></p>
+    <p id="diaSemana"></p>
+  </div>
+
+  <script>
+    let frases = [];
+
+    function relogio() {
+      const agora = new Date();
+      const dia = agora.getDay();
+      const hora = agora.getHours();
+      const minutos = agora.getMinutes().toString().padStart(2, "0");
+      const segundos = agora.getSeconds().toString().padStart(2, "0");
+      const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const dataFormatada = agora.toLocaleDateString("pt-BR", opcoes);
+
+      let  cor, mensagem, imagem;
+      let diaSemana;
+      if (dia === 1 || dia === 2 || dia === 3 || dia === 5) {
+        diaSemana = "😉 Acredite em você e todo o resto virá naturalmente.";
+      } else if (dia === 4) {
+        diaSemana = "^o^ QuiNTou. 🎉 Acredite em você e todo o resto virá naturalmente.";
+      } else if (dia === 6) {
+        diaSemana = "😎 Sabadou!";
+      } else {
+        diaSemana = "😴 Domingou!";
+      }
+      if (hora >= 6 && hora < 12) {
+        imagem = "url('manha.jpg')";
+        document.body.style.backgroundImage = imagem;
+        mensagem = "Dia Animado! ☀️";
+        frases = [
+          "Hora de meditar.",
+          "Que não te faltem motivos para agradecer nem coragem para sonhar.",
+          "Ouse sonhar! Você é muito mais capaz do que a sua mente te diz."
+        ];
+      } else if (hora >= 12 && hora < 18) {
+        imagem="url('tarde.jpg')";
+        document.body.style.backgroundImage = "";
+        mensagem = "Tarde Alegre! 🌇";
+        frases = [
+          "Recarregue suas energias com o brilho de uma bela tarde.",
+          "E para a tarde... aquela paz bonita que invade a alma e tranquiliza o coração...",
+          "Com força e Fé para lutar, nada nos vencerá."
+        ];
+      } else if (hora >= 18 && hora < 23) {
+        imagem="url('noite.jpg')";
+        document.body.style.backgroundImage = "";
+        mensagem = "Noite Iluminada 🌆";
+        frases = [
+          "Coisas boas acontecem para quem acredita. Boa Noite!",
+          "Quanto mais escura a noite, mais brilhante são as estrelas.",
+          "Uma pedra no meio do caminho é sinal de que na linha de chegada a recompensa valerá a pena."
+        ];
+      } else {
+        imagem="url(madrugada.jpg')";
+        document.body.style.backgroundImage = "";
+        mensagem = "Hora de descansar! 🌑";
+        frases = [
+          "Repouse suas energias.",
+          "Durma bem, só não ronque.",
+          "Apague e esqueça seus problemas do dia."
+        ];
+      }
+
+      if (cor) document.body.style.backgroundColor = cor;
+
+      document.getElementById("título").innerHTML = mensagem;
+      document.getElementById("hora").innerHTML = "Agora são " + hora + ":" + minutos + ":" + segundos;
+      document.getElementById("data").innerHTML = "📆 " + dataFormatada;
+      document.getElementById("diaSemana").innerHTML = diaSemana;
+    }
+
+    function mudarFrase() {
+      if (frases.length > 0) {
+        const fraseEscolhida = frases[Math.floor(Math.random() * frases.length)];
+        document.getElementById("frases").innerHTML = fraseEscolhida;
+      }
+    }
+
+    relogio();
+    setInterval(relogio, 1000);
+    mudarFrase();
+    setInterval(mudarFrase, 4000);
+  </script>
+  <script>
+    if ("serviceWorker" in navigator){
+        navigator.serviceWorker.register("service-worker.js")
+        .then(()=>console.log("Service Worker registrado"))
+        .catch(err=> console.log(" Erro no SW:", err));
+    }
+</script>
+</body>
+</html>
