@@ -1,139 +1,340 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RelogioLocaliza</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diário</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000000">
   <style>
-    body { 
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      transition: background-color 1s;
+    :root {
+      --bg-light: #f9f9f9;
+      --bg-dark: #1e1e1e;
+      --text-light: #222;
+      --text-dark: #f1f1f1;
+      --feliz: #fff59d;
+      --triste: #90caf9;
+      --irritado: #ef9a9a;
+      --calmo: #a5d6a7;
+      --confuso: #ce93d8;
     }
-
-    .container {
-      background-color: rgb(248, 248, 244);
+    body {
+      font-family: sans-serif;
+      background: var(--bg-light);
+      color: var(--text-light);
       padding: 20px;
-      max-width: 400px; 
-      width: 100%;
-      border-radius: 10px;
-      text-align: center;
-      color:black
+      transition: 0.3s;
+      margin: 0;
+    }
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    .modo-btn {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      background: #444;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    h1 { margin-top: 60px; }
+    .toolbar {
+      margin-bottom: 10px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .toolbar button {
+      padding: 6px 12px;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      flex: 1 1 auto;
+      min-width: 80px;
+    }
+    .btn-feliz { background: var(--feliz); }
+    .btn-triste { background: var(--triste); }
+    .btn-irritado { background: var(--irritado); }
+    .btn-calmo { background: var(--calmo); }
+    .btn-confuso { background: var(--confuso); }
+
+    .editor {
+      border: 1px solid #ccc;
+      padding: 15px;
+      min-height: 450px;
+      border-radius: 6px;
+      background: #fff;
+      color: #000;
+      outline: none;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      overflow-y: auto;
+      max-width: 100%;
+      line-height: 1.4;
+      position: relative;
+    }
+    .editor:empty::before {
+      content: attr(data-placeholder);
+      color: gray;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    body.dark .editor {
+      background: #2a2a2a;
+      color: var(--text-dark);
+      border-color: #444;
     }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 22px; }
-      p { font-size: 14px; }
-      .container { width: 70%; }
+    .postit {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 6px;
+      padding: 6px 8px;
+      margin: 0 4px 4px 0;
+      position: relative;
+      color: #000;
+      max-width: 40%;
+      box-sizing: border-box;
+      word-break: break-word;
+      font-size: 14px;
+      background-clip: padding-box;
+    }
+    .postit .postit {
+      margin-left: 10px;
+      max-width: 90%;
+      font-size: 13px;
+      padding: 4px 6px;
+    }
+    .postit-text {
+      flex: 1 1 auto;
+      outline: none;
+      min-width: 30px;
+    }
+    .remove-postit {
+      font-size: 14px;
+      color: black;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 12px;
+      flex-shrink: 0;
+      line-height: 1;
+      padding: 0;
+      user-select: none;
+    }
+    .feliz    { background: var(--feliz); }
+    .triste   { background: var(--triste); }
+    .irritado { background: var(--irritado); }
+    .calmo    { background: var(--calmo); }
+    .confuso  { background: var(--confuso); }
+
+    #saved-entries { margin-top: 30px; }
+    .entry {
+      background: #fff;
+      padding: 30px 10px 15px 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      position: relative;
+      word-break: break-word;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+    }
+    body.dark .entry {
+      background: #2a2a2a;
+      border-color: #444;
+      color: var(--text-dark);
+    }
+    .entry-time {
+      font-size: 11px;
+      color: gray;
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      user-select: none;
+    }
+    .delete-entry {
+      position: absolute;
+      top: 28px;
+      right: 10px;
+      background: #d33;
+      color: white;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    #status {
+      margin-top: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 600px) {
+      .editor { min-height: 450px; font-size: 16px; }
+      .toolbar button { flex: 1 1 48%; min-width: unset; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <p id="título"></p>
-    <p id="hora"></p>
-    <p id="data"></p>
-    <p id="frases"></p>
-    <p id="diaSemana"></p>
+  <button class="modo-btn" onclick="alternarModo()">🌗Modo</button>
+  <h1>📝Diário</h1>
+
+  <div class="toolbar">
+    <button class="btn-feliz" onclick="inserirPostit('feliz')">😊</button>
+    <button class="btn-triste" onclick="inserirPostit('triste')">😢</button>
+    <button class="btn-irritado" onclick="inserirPostit('irritado')">😠</button>
+    <button class="btn-calmo" onclick="inserirPostit('calmo')">😌</button>
+    <button class="btn-confuso" onclick="inserirPostit('confuso')">😕</button>
+    <button onclick="salvarEntrada()">💾 Salvar</button>
   </div>
 
+  <div id="editor" class="editor" contenteditable="true" data-placeholder="Escreva sua entrada aqui..."></div>
+
+  <div id="status"></div>
+
+  <h2>📂 Entradas Salvas</h2>
+  <div id="saved-entries"></div>
+
   <script>
-    let frases = [];
+    const editor = document.getElementById('editor');
+    const savedContainer = document.getElementById('saved-entries');
+    const status = document.getElementById('status');
 
-    function relogio() {
-      const agora = new Date();
-      const dia = agora.getDay();
-      const hora = agora.getHours();
-      const minutos = agora.getMinutes().toString().padStart(2, "0");
-      const segundos = agora.getSeconds().toString().padStart(2, "0");
-      const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      const dataFormatada = agora.toLocaleDateString("pt-BR", opcoes);
+    function inserirPostit(tipo) {
+      const sel = window.getSelection();
+      const span = document.createElement('span');
+      span.className = `postit ${tipo}`;
+      span.contentEditable = false;
 
-      let mensagem,
-      imagem,
-     diaSemana;
-      if (dia === 1 || dia === 2 || dia === 3 || dia === 5) {
-        diaSemana = "😉 Acredite em você e todo o resto virá naturalmente.";
-      } else if (dia === 4) {
-        diaSemana = "^o^ QuiNTou. 🎉 Acredite em você e todo o resto virá naturalmente.";
-      } else if (dia === 6) {
-        diaSemana = "😎 Sabadou!";
-      } else {
-        diaSemana = "😴 Domingou!";
-      }
-      if (hora >= 6 && hora < 12) {
-        imagem = "url('manha.jpg')";
-        document.body.style.backgroundImage = imagem;
-        mensagem = "Dia Animado! ☀️";
-        frases = [
-          "Hora de meditar.",
-          "Que não te faltem motivos para agradecer nem coragem para sonhar.",
-          "Ouse sonhar! Você é muito mais capaz do que a sua mente te diz."
-        ];
-      } else if (hora >= 12 && hora < 18) {
-        imagem="url('tarde.jpg')";
-        document.body.style.backgroundImage = imagem;
-        mensagem = "Tarde Alegre! 🌇";
-        frases = [
-          "Recarregue suas energias com o brilho de uma bela tarde.",
-          "E para a tarde... aquela paz bonita que invade a alma e tranquiliza o coração...",
-          "Com força e Fé para lutar, nada nos vencerá."
-        ];
-      } else if (hora >= 18 && hora < 23) {
-        imagem="url('noite.jpg')";
-        document.body.style.backgroundImage = imagem;
-        mensagem = "Noite Iluminada 🌆";
-        frases = [
-          "Coisas boas acontecem para quem acredita. Boa Noite!",
-          "Quanto mais escura a noite, mais brilhante são as estrelas.",
-          "Uma pedra no meio do caminho é sinal de que na linha de chegada a recompensa valerá a pena."
-        ];
-      } else {
-        imagem="url(madrugada.jpg')";
-        document.body.style.backgroundImage = imagem;
-        mensagem = "Hora de descansar! 🌑";
-        frases = [
-          "Repouse suas energias.",
-          "Durma bem, só não ronque.",
-          "Apague e esqueça seus problemas do dia."
-        ];
+      const textDiv = document.createElement('div');
+      textDiv.className = 'postit-text';
+      textDiv.contentEditable = true;
+
+      const removeBtn = document.createElement('button');
+      removeBtn.innerText = '✖';
+      removeBtn.className = 'remove-postit';
+      removeBtn.onclick = e => {
+        e.stopPropagation();
+        span.remove();
+      };
+
+      span.appendChild(textDiv);
+      span.appendChild(removeBtn);
+
+      if (!sel.rangeCount) {
+        editor.appendChild(span);
+        return;
       }
 
-    
+      let container = sel.anchorNode;
+      while (container && container !== editor) {
+        container = container.parentNode;
+      }
 
-      document.getElementById("título").innerHTML = mensagem;
-      document.getElementById("hora").innerHTML = "Agora são " + hora + ":" + minutos + ":" + segundos;
-      document.getElementById("data").innerHTML = "📆 " + dataFormatada;
-      document.getElementById("diaSemana").innerHTML = diaSemana;
+      if (container === editor) {
+        const range = sel.getRangeAt(0);
+        range.deleteContents();
+        range.insertNode(span);
+      } else {
+        editor.appendChild(span);
+      }
+
+      const newRange = document.createRange();
+      newRange.selectNodeContents(textDiv);
+      newRange.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(newRange);
     }
 
-    function mudarFrase() {
-      if (frases.length > 0) {
-        const fraseEscolhida = frases[Math.floor(Math.random() * frases.length)];
-        document.getElementById("frases").innerHTML = fraseEscolhida;
+    function salvarEntrada() {
+      const conteudo = editor.innerHTML.trim();
+      if (!conteudo) {
+        status.innerText = '⚠️ Nada para salvar.';
+        status.style.color = 'red';
+        return;
       }
+
+      const data = new Date().toLocaleString('pt-BR');
+      const entradas = JSON.parse(localStorage.getItem('entradas') || '[]');
+      entradas.unshift({ conteudo, data });
+      localStorage.setItem('entradas', JSON.stringify(entradas));
+
+      editor.innerHTML = '';
+      status.innerText = '✅ Entrada salva!';
+      status.style.color = 'green';
+      setTimeout(() => status.innerText = '', 2000);
+      carregarEntradas();
     }
 
-    relogio();
-    setInterval(relogio, 1000);
-    mudarFrase();
-    setInterval(mudarFrase, 4000);
+    function carregarEntradas() {
+      savedContainer.innerHTML = '';
+      const entradas = JSON.parse(localStorage.getItem('entradas') || '[]');
+      entradas.forEach((e, i) => {
+        const div = document.createElement('div');
+        div.className = 'entry';
+
+        const time = document.createElement('div');
+        time.className = 'entry-time';
+        time.innerText = e.data;
+
+        const content = document.createElement('div');
+        content.innerHTML = e.conteudo;
+        content.querySelectorAll('.postit-text').forEach(pt => {
+          pt.removeAttribute('contenteditable');
+        });
+
+        const del = document.createElement('button');
+        del.className = 'delete-entry';
+        del.innerText = 'Apagar';
+        del.onclick = () => {
+          entradas.splice(i, 1);
+          localStorage.setItem('entradas', JSON.stringify(entradas));
+          carregarEntradas();
+        };
+
+        div.appendChild(time);
+        div.appendChild(content);
+        div.appendChild(del);
+        savedContainer.appendChild(div);
+      });
+    }
+
+    function alternarModo() {
+      document.body.classList.toggle('dark');
+      const modo = document.body.classList.contains('dark') ? 'dark' : 'light';
+      localStorage.setItem('modo', modo);
+    }
+
+    function carregarModo() {
+      const modo = localStorage.getItem('modo');
+      if (modo === 'dark') document.body.classList.add('dark');
+    }
+
+    carregarModo();
+    carregarEntradas();
   </script>
+
   <script>
-    if ("serviceWorker" in navigator){
-        navigator.serviceWorker.register("service-worker.js")
-        .then(()=>console.log("Service Worker registrado"))
-        .catch(err=> console.log(" Erro no SW:", err));
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("Service Worker registrado"))
+      .catch(err => console.log("Erro no SW:", err));
     }
-</script>
+  </script>
 </body>
 </html>
