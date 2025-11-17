@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceIA</title>
+   <style>
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #5e0ce2, #7754e1);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.chatbox {
+    background: rgba(8, 5, 229, 0.861);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 20px rgba(241, 4, 4, 0.564);
+    width: 300px;
+}
+
+.chatbox h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.chatbox button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #00c3ff;
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.chatbox button:hover {
+    background: #00a3d4;
+    transform: scale(1.05);
+}
+
+.chatbox button:active {
+    transform: scale(0.95);
+}
+</style>
+</head>
+<body>
+<div class="chatbox">
+    <h2>Chatbot VoiceIA</h2>
+    <button onclick="ouvir()">Falar Agora</button>
+</div>
+<script>
+const pergunta= "Você está bem";
+const resposta=" Eu estou bem, e você? Obrigado por perguntar!";
+function falar(texto){
+    const discursar= new SpeechSynthesisUtterance(texto);
+    discursar.lang="pt-BR";
+    discursar.rate=1;
+    window.speechSynthesis.speak(discursar);
+}
+function ouvir(){
+    const reconheca= new webkitSpeechRecognition();
+    reconheca.lang="pt-BR";
+    reconheca.start();
+    reconheca.onresult= function(event){
+        const textoFala= event.results[0][0].transcript.toLowerCase();
+        if(textoFala.includes(pergunta)){
+            falar(resposta);
+        }else{
+            falar("Desculpe,não entendi! Só entendo a pergunta: Você está bem");
+        }
+    };
+
+}
+</script>
+    
+</body>
+</html>
